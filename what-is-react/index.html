@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Example</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+      console.log(React);
+      console.log(ReactDOM);
+
+      // class App extends React.Component {
+      //   state = {
+      //     age: 39,
+      //   };
+      //   interval = null;
+      //   constructor(props) {
+      //     super(props);
+
+      //     console.log("constructor", props);
+      //   }
+      //   render() {
+      //     console.log("render");
+      //     return (
+      //       <div>
+      //         <h2>
+      //           Hello {this.props.name} - {this.state.age}
+      //         </h2>
+      //       </div>
+      //     );
+      //   }
+      //   // static getDerivedStateFromProps(nextProps, prevState) {
+      //   //   console.log("getDerivedStateFromProps", nextProps, prevState);
+
+      //   //   return {
+      //   //     age: 390,
+      //   //   };
+      //   // }
+      //   componentDidMount() {
+      //     console.log("componentDidMount");
+
+      //     this.interval = setInterval(() => {
+      //       // console.log("setInterval");
+      //       this.setState((state) => ({ ...state, age: state.age + 1 }));
+      //     }, 1000);
+      //   }
+
+      //   // componentWillReceiveProps(nextProps) {
+      //   //   console.log("componentWillReceiveProps", nextProps);
+      //   // }
+
+      //   shouldComponentUpdate(nextProps, nextState) {
+      //     console.log("shouldComponentUpdate", nextProps, nextState);
+
+      //     return true;
+      //   }
+
+      //   // componentWillUpdate(nextProps, nextState) {
+      //   //   console.log("componentWillUpdate", nextProps, nextState);
+      //   // }
+
+      //   componentDidUpdate(prevProps, prevState) {
+      //     console.log("componentDidUpdate", prevProps, prevState);
+      //   }
+
+      //   componentWillUnmount() {
+      //     clearInterval(this.interval);
+      //   }
+      // }
+
+      // let i = 0;
+
+      // class App extends React.Component {
+      //   state = { list: [] };
+
+      //   render() {
+      //     return (
+      //       <div id="list" style={{ height: 100, overflow: "scroll" }}>
+      //         {this.state.list.map((i) => {
+      //           return <div>{i}</div>;
+      //         })}
+      //       </div>
+      //     );
+      //   }
+
+      //   componentDidMount() {
+      //     setInterval(() => {
+      //       this.setState((state) => ({
+      //         list: [...state.list, i++],
+      //       }));
+      //     }, 1000);
+      //   }
+
+      //   getSnapshotBeforeUpdate(prevProps, prevState) {
+      //     if (prevState.list.length === this.state.list.length) return null;
+      //     const list = document.querySelector("#list");
+      //     return list.scrollHeight - list.scrollTop;
+      //   }
+
+      //   componentDidUpdate(prevProps, prevState, snapshot) {
+      //     console.log(snapshot);
+      //     if (snapshot === null) return;
+      //     const list = document.querySelector("#list");
+      //     list.scrollTop = list.scrollHeight - snapshot;
+      //   }
+      // }
+
+      class App extends React.Component {
+        state = {
+          hasError: false,
+        };
+        render() {
+          if (this.state.hasError) {
+            return <div>예상치 못한 에러가 발생했다.</div>;
+          }
+          return <WebService />;
+        }
+        componentDidCatch(error, info) {
+          this.setState({ hasError: true });
+        }
+      }
+
+      ReactDOM.render(<App name="Mark" />, document.querySelector("#root"));
+    </script>
+  </body>
+</html>
